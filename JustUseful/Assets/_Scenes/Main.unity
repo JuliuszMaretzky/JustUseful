@@ -328,6 +328,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a8a1d6e15979744afd6695f678c6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelectionSortActive: 0
+  arrayLength: 20
+  minValue: -50
+  maxValue: 150
 --- !u!4 &1570161249
 Transform:
   m_ObjectHideFlags: 0
