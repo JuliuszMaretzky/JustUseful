@@ -11,7 +11,7 @@ public class Executor : MonoBehaviour
     [SerializeField] private bool isSelectionSortActive;
     [SerializeField] private bool isInsertionSortActive;
     [SerializeField] private bool isBubbleSortActive;
-
+    [SerializeField] private bool isQuickSortActive;
 
 
     
@@ -28,6 +28,10 @@ public class Executor : MonoBehaviour
         if(isBubbleSortActive)
         {
             ExecuteSort(BubbleSort.Sort, out isBubbleSortActive);
+        }
+        if(isQuickSortActive)
+        {
+            ExecuteSort(QuickSort.Sort, out isQuickSortActive);
         }
     }
 
