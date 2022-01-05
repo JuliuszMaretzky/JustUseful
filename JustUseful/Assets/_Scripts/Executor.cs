@@ -4,36 +4,30 @@ using UnityEngine;
 
 public class Executor : MonoBehaviour
 {
-    [Header("Array parameters")]
     [SerializeField] private int arrayLength;
     [SerializeField] private int minValue;
     [SerializeField] private int maxValue;
 
-    [Header("Selection Sort")]
     [SerializeField] private bool isSelectionSortActive;
-
-    [Header("Insertion Sort")]
     [SerializeField] private bool isInsertionSortActive;
+    [SerializeField] private bool isBubbleSortActive;
+
+
 
     
     private void Update()
     {
         if(isSelectionSortActive)
         {
-            var newArray = CreateIntArray(arrayLength, minValue, maxValue);
-            Debug.Log($"New array: {PrintArray(newArray)}");
-            SelectionSort.Sort(newArray);
-            Debug.Log($"Sorted array: {PrintArray(newArray)}");
-            isSelectionSortActive = false;
+            ExecuteSort(SelectionSort.Sort, out isSelectionSortActive);
         }
-
         if(isInsertionSortActive)
         {
-            var newArray = CreateIntArray(arrayLength, minValue, maxValue);
-            Debug.Log($"New array: {PrintArray(newArray)}");
-            InsertionSort.Sort(newArray);
-            Debug.Log($"Sorted array: {PrintArray(newArray)}");
-            isInsertionSortActive = false;
+            ExecuteSort(InsertionSort.Sort, out isInsertionSortActive);
+        }
+        if(isBubbleSortActive)
+        {
+            ExecuteSort(BubbleSort.Sort, out isBubbleSortActive);
         }
     }
 
@@ -58,5 +52,14 @@ public class Executor : MonoBehaviour
         }
 
         return text;
+    }
+
+    private void ExecuteSort(System.Action<int[]> SortMethod, out bool sortFlag)
+    {
+        var newArray = CreateIntArray(arrayLength, minValue, maxValue);
+        Debug.Log($"New array: {PrintArray(newArray)}");
+        SortMethod(newArray);
+        Debug.Log($"Sorted array: {PrintArray(newArray)}");
+        sortFlag = false;
     }
 }
