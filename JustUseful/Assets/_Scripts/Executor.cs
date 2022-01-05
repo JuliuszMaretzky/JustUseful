@@ -13,23 +13,21 @@ public class Executor : MonoBehaviour
     [SerializeField] private bool isBubbleSortActive;
     [SerializeField] private bool isQuickSortActive;
 
-
-    
     private void Update()
     {
-        if(isSelectionSortActive)
+        if (isSelectionSortActive)
         {
             ExecuteSort(SelectionSort.Sort, out isSelectionSortActive);
         }
-        if(isInsertionSortActive)
+        if (isInsertionSortActive)
         {
             ExecuteSort(InsertionSort.Sort, out isInsertionSortActive);
         }
-        if(isBubbleSortActive)
+        if (isBubbleSortActive)
         {
             ExecuteSort(BubbleSort.Sort, out isBubbleSortActive);
         }
-        if(isQuickSortActive)
+        if (isQuickSortActive)
         {
             ExecuteSort(QuickSort.Sort, out isQuickSortActive);
         }
@@ -39,7 +37,7 @@ public class Executor : MonoBehaviour
     {
         var array = new int[length];
 
-        for(int i=0;i<array.Length;i++)
+        for (int i = 0; i < array.Length; i++)
         {
             array[i] = Random.Range(min, max);
         }
@@ -50,7 +48,7 @@ public class Executor : MonoBehaviour
     private string PrintArray<T>(T[] array)
     {
         var text = "";
-        foreach(var i in array)
+        foreach (var i in array)
         {
             text += i.ToString() + " ";
         }
