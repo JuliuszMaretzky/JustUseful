@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Executor : MonoBehaviour
 {
-    [Header("Selection Sort")]
-    [SerializeField] private bool isSelectionSortActive;
+    [Header("Array parameters")]
     [SerializeField] private int arrayLength;
     [SerializeField] private int minValue;
     [SerializeField] private int maxValue;
+
+    [Header("Selection Sort")]
+    [SerializeField] private bool isSelectionSortActive;
+
+    [Header("Insertion Sort")]
+    [SerializeField] private bool isInsertionSortActive;
 
     
     private void Update()
@@ -20,6 +25,15 @@ public class Executor : MonoBehaviour
             SelectionSort.Sort(newArray);
             Debug.Log($"Sorted array: {PrintArray(newArray)}");
             isSelectionSortActive = false;
+        }
+
+        if(isInsertionSortActive)
+        {
+            var newArray = CreateIntArray(arrayLength, minValue, maxValue);
+            Debug.Log($"New array: {PrintArray(newArray)}");
+            InsertionSort.Sort(newArray);
+            Debug.Log($"Sorted array: {PrintArray(newArray)}");
+            isInsertionSortActive = false;
         }
     }
 
