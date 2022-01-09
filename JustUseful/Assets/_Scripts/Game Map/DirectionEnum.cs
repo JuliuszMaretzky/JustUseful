@@ -7,5 +7,6 @@ public enum DirectionEnum
     South,
     SouthWest,
     West,
-    NorthWest
+    NorthWest,
+    None
 }
