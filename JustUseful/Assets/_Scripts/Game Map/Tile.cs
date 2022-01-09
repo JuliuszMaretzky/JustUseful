@@ -12,16 +12,11 @@ public class Tile : MonoBehaviour
     }
 
     public List<Direction> directions;
-    public Dictionary<DirectionEnum, Tile> neighbors = new Dictionary<DirectionEnum, Tile>();
 
     public bool isSigned;
 
     private void Start()
     {
-        neighbors[DirectionEnum.North] = neighbors[DirectionEnum.NorthEast] = neighbors[DirectionEnum.East] =
-            neighbors[DirectionEnum.SouthEast] = neighbors[DirectionEnum.South] = neighbors[DirectionEnum.SouthWest] =
-            neighbors[DirectionEnum.West] = neighbors[DirectionEnum.NorthWest] = null;
-
         directions = new List<Direction>();
 
         isSigned = false;
@@ -29,7 +24,6 @@ public class Tile : MonoBehaviour
 
     public void SetConnection(DirectionEnum direction, Tile tile)
     {
-        neighbors[direction] = tile;
         directions.Add(new Direction() { direction = direction, tile = tile });
     }
 

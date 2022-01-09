@@ -44,8 +44,6 @@ public class Map : MonoBehaviour
 
                 var counter = 0;
 
-                Debug.Log($"pole {i},{j}");
-
                 for (int k = i - 1; k < i + 2; k++)
                 {
                     for (int l = j - 1; l < j + 2; l++)
@@ -58,8 +56,6 @@ public class Map : MonoBehaviour
 
                         if (map[k, l].isSigned)
                         {
-                            Debug.Log($"Sprawdzam s¹siada {k},{l}");
-
                             DirectionEnum dir=DirectionEnum.None;
 
                             switch (counter)
@@ -90,8 +86,6 @@ public class Map : MonoBehaviour
                                     break;
                             }
 
-                            Debug.Log($"Wêze³ {i},{j} dostaje s¹siada {k},{l} na kierunku {dir}");
-
                             if (dir != DirectionEnum.None)
                             {
                                 map[i, j].SetConnection(dir, map[k, l]);
@@ -103,5 +97,10 @@ public class Map : MonoBehaviour
                 }
             }
         }
+    }
+
+    public List<Tile> ReturnData()
+    {
+        return new List<Tile>() { map[0, 0], map[horizontal - 1, vertical - 1]};
     }
 }

@@ -259,8 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7667a6b229ee0214c90d9d115a2e93d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal: 4
-  vertical: 5
+  horizontal: 20
+  vertical: 15
   isCreatingConnections: 0
 --- !u!1 &963194225
 GameObject:
@@ -339,7 +339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 6.77, z: -0.58}
+  m_LocalPosition: {x: 20, y: 15, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -460,6 +460,11 @@ MonoBehaviour:
   isInsertionSortActive: 0
   isBubbleSortActive: 0
   isQuickSortActive: 0
+  map: {fileID: 915424157}
+  start: {fileID: 0}
+  target: {fileID: 0}
+  isSearchingPath: 0
+  isColoring: 1
 --- !u!4 &1570161249
 Transform:
   m_ObjectHideFlags: 0

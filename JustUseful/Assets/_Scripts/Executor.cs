@@ -13,6 +13,11 @@ public class Executor : MonoBehaviour
     [SerializeField] private bool isBubbleSortActive;
     [SerializeField] private bool isQuickSortActive;
 
+    [SerializeField] private Map map;
+    [SerializeField] private Tile start, target;
+    [SerializeField] private bool isSearchingPath;
+    [SerializeField] private bool isColoring;
+
     private void Update()
     {
         if (isSelectionSortActive)
@@ -30,6 +35,19 @@ public class Executor : MonoBehaviour
         if (isQuickSortActive)
         {
             ExecuteSort(QuickSort.Sort, out isQuickSortActive);
+        }
+        if(isSearchingPath)
+        {
+            var tiles = map.ReturnData();
+            start = tiles[0];
+            target = tiles[1];
+
+            //when we want to see colors
+            StartCoroutine(AStar.Search(start, target, isColoring));
+
+            //when we want to use it quickly
+            //AStar.Search(start, target, isColoring);
+            isSearchingPath = false;
         }
     }
 
