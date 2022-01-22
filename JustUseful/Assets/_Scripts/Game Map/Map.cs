@@ -7,6 +7,9 @@ public class Map : MonoBehaviour
     [SerializeField] private int horizontal, vertical;
     [SerializeField] private Tile[,] map;
     [SerializeField] private bool isCreatingConnections;
+    [SerializeField] private bool saveMap;
+    [SerializeField] private bool deleteMap;
+    [SerializeField] private bool loadMap;
 
     private void Start()
     {
@@ -16,8 +19,8 @@ public class Map : MonoBehaviour
         {
             for (int j = 0; j < vertical; j++)
             {
-                var newTile = ObjectPooler.Pooler.SpawnFromPool("Tile", new Vector3(i, 0, j), Quaternion.identity);
-                map[i, j] = newTile.GetComponent<Tile>();
+                map[i, j] = 
+                    ObjectPooler.Pooler.SpawnFromPool("Tile", new Vector3(i, 0, j), Quaternion.identity).GetComponent<Tile>();
             }
         }
     }
@@ -29,6 +32,22 @@ public class Map : MonoBehaviour
             CreateConnections();
             isCreatingConnections = false;
         }
+        if(saveMap)
+        {
+            SaveMap();
+            saveMap = false;
+        }
+        if(deleteMap)
+        {
+            DeleteMap();
+            deleteMap = false;
+        }
+        if(loadMap)
+        {
+            LoadMap();
+            loadMap = false;
+        }
+
     }
 
     private void CreateConnections()
@@ -102,5 +121,52 @@ public class Map : MonoBehaviour
     public List<Tile> ReturnData()
     {
         return new List<Tile>() { map[0, 0], map[horizontal - 1, vertical - 1]};
+    }
+
+    public Tile[,] GetMap()
+    {
+        return map;
+    }
+
+    public void SaveMap()
+    {
+        SaveLoadSystem.SaveMap(map);
+    }
+
+    public void LoadMap()
+    {
+        var loadedData = SaveLoadSystem.LoadMap();
+
+        var columns = loadedData.columns;
+        var rows = loadedData.rows;
+        var newMap = new Tile[columns, rows];
+        var counter = -1;
+
+        for(int i=0;i<columns;i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                counter++;
+                newMap[i, j] = 
+                    ObjectPooler.Pooler.SpawnFromPool("Tile", new Vector3(i, 0f, j), Quaternion.identity).GetComponent<Tile>();
+                newMap[i, j].isSigned = loadedData.signedArray[counter];
+            }
+        }
+
+        map = newMap;
+        CreateConnections();
+    }
+
+    private void DeleteMap()
+    {
+        for (int i = 0; i < map.GetLength(0);i++)
+        {
+            for (int j = 0; j < map.GetLength(1);j++)
+            {
+                ObjectPooler.Pooler.BackToPool(map[i, j].gameObject);
+            }
+        }
+
+        map = null;
     }
 }
